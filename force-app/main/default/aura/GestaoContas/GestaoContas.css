@@ -1,0 +1,22 @@
+.THIS .botaoIcone.slds-p-around_small{
+    margin-top: 27px;
+    margin-left: 30px;
+    height: 100%;
+}
+
+.THIS .slds-button.slds-button_brand{
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #191970;
+    border: none;
+}
+
+.THIS .slds-table_header-fixed_container.slds-scrollable_x{
+background-color: #DCDCDC;
+}
+
+.THIS .slds-button.slds-button_icon.btnfechar.slds-button_icon-bare{
+margin-left: 592px;
+margin-top: -25px;   
+}

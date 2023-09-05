@@ -1,0 +1,148 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable" controller="GestaoContasController" access="global">
+
+
+
+    <aura:attribute name="data" type="Object" />
+    <aura:attribute name="columns" type="List" />
+
+    <aura:handler name="init" value="{! this }" action="{! c.init }" />
+
+    <aura:attribute name="exibirModal" type="boolean" default="false" />
+
+    <aura:attribute name="pacote" type="boolean" default="false" />
+
+    <aura:attribute name="accountType" type="string" default="CPF" />
+
+    <aura:attribute name="cep" type="string" default="" />
+
+    <aura:attribute name="rua" type="string" default="" />
+
+    <aura:attribute name="bairro" type="string" default="" />
+
+    <aura:attribute name="cidade" type="string" default="" />
+
+    <aura:attribute name="uf" type="string" default="" />
+
+    <aura:if isTrue="{! v.pacote}">
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" class="btnfechar" variant="bare"
+                        onclick="{! c.fecharModal1 }" alternativeText="Fechar" title="Fechar" />
+                    <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Adicionar Pacote</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+
+                    <lightning:layout multipleRows="true">
+                        <!-- Linha 1 -->
+                        <lightning:layoutItem padding="around-small" size="12">
+                            <lightning:input name="codRastreio" label="Código de Rastreio" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+                <div class="slds-modal__footer">
+                    <button class="slds-button slds-button_brand">Adicionar</button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </aura:if>
+
+
+
+    <aura:attribute name="options" type="List" default="[
+    {'label': 'CPF', 'value': 'CPF'},
+    {'label': 'PJ', 'value': 'PJ'},
+    ]" />
+
+    <lightning:card>
+        <lightning:layout horizontalAlign="center">
+            <lightning:layoutItem padding="around-small">
+                <lightning:combobox name="pessoaTipo" label="Exibir Contas" value="CPF" options="{!v.options}" onchange="{!c.changeTipoConta}"
+                    placeholder="Selecione Pessoa Física ou Jurídica" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" class="botaoIcone">
+                <lightning:buttonIcon iconName="utility:refresh" variant="bare" onclick="{! c.handleSuccess }"
+                    alternativeText="Atualizar" title="Atualizar" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="center">
+            <lightning:layoutItem padding="around-small">
+                <div style="height: 300px">
+                    <lightning:datatable keyField="id" data="{! v.data }" columns="{! v.columns }"
+                        onrowaction="{! c.handleRowAction }" />
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="center">
+            <lightning:layoutItem padding="around-small">
+                <aura:if isTrue="{! v.exibirModal}">
+                    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                        class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                            <div class="slds-modal__header">
+                                <lightning:buttonIcon iconName="utility:close" class="btnfechar" variant="bare"
+                                    onclick="{! c.fecharModal }" alternativeText="Fechar" title="Fechar" />
+                                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Criar Conta</h1>
+                            </div>
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+
+                                <lightning:layout multipleRows="true">
+                                    <!-- Linha 1 -->
+                                    <lightning:layoutItem padding="around-small" size="6">
+                                        <lightning:input name="cpfCnpj" label="CPF OU CNPJ: " />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6">
+                                        <lightning:input name="cep" label="CEP: " value="{!v.cep}" onchange="{!c.changeCep}" onfocusout="{!c.buscaCep}" />
+                                    </lightning:layoutItem>
+
+                                    <!-- Linha 1 -->
+                                    <lightning:layoutItem padding="around-small" size="12">
+                                        <lightning:input name="nome" label="Nome ou Razão Social: " />
+                                    </lightning:layoutItem>
+
+                                    <!-- Linha 2 -->
+                                    <lightning:layoutItem padding="around-small" size="6">
+                                        <lightning:input name="rua" value="{!v.rua}" label="Rua: " />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6">
+                                        <lightning:input name="bairro" value="{!v.bairro}" label="Bairro: " />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6">
+                                        <lightning:input name="cidade" value="{!v.cidade}" label="Cidade: " />
+                                    </lightning:layoutItem>
+                                    <!-- Linha 3 -->
+                                    <lightning:layoutItem padding="around-small" size="6">
+                                        <lightning:input name="uf" value="{!v.uf}" label="UF" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6">
+                                        <lightning:input name="telefone" label="Telefone: " />
+                                    </lightning:layoutItem>
+
+                                    <!-- Linha 1 -->
+                                    <lightning:layoutItem padding="around-small" size="6">
+                                        <lightning:input name="qtnPacotes" label="Quantidades de Pacotes: " />
+                                    </lightning:layoutItem>
+
+                                </lightning:layout>
+                            </div>
+                            <div class="slds-modal__footer">
+                                <button class="slds-button slds-button_neutral" aria-label="Cancel and close"
+                                    onclick="{! c.fecharModal}">Cancelar</button>
+                                <button class="slds-button slds-button_brand">Salvar</button>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+                    <aura:set attribute="else">
+                        <div>
+                            <lightning:button variant="brand" label="Nova Conta" title="Brand action"
+                                onclick="{! c.abrirModal }" />
+                        </div>
+                    </aura:set>
+                </aura:if>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </lightning:card>
+</aura:component>
