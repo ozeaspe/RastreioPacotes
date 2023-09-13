@@ -18,6 +18,7 @@
                         cpfcnpj: accType == 'CPF' ? element.CPF__c : element.CNPJ__c,
                         cep: element.BillingPostalCode,
                         bairro:element.BillingCity,
+                        localidade: element.localidade__c,
                         rua: element.BillingStreet,
                         uf: element.BillingState,
                         telefone:element.Phone,
@@ -49,6 +50,9 @@
                 toastEvent.fire();
             }else{
                 cmp.set("v.rua", response.logradouro);
+                cmp.set("v.bairro", response.bairro);
+                cmp.set("v.cidade", response.localidade);
+                cmp.set("v.uf", response.uf);
             }
         }));
         $A.enqueueAction(action); 

@@ -12,6 +12,7 @@
             { label: 'CEP', fieldName: 'cep', type: 'integer' },
             { label: 'Rua', fieldName: 'rua', type: 'text' },
             { label: 'Bairro', fieldName: 'bairro', type: 'text' },
+            { label: 'Cidade', fieldName: 'localidade', type: 'text' },
             { label: 'UF', fieldName: 'uf', type: 'text' },
             { label: 'Telefone', fieldName: 'telefone', type: 'phone' },
             { label: 'Quantidade de Pacotes', fieldName: 'qtdpacotes', type: 'integer' },
