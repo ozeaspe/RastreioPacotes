@@ -56,5 +56,23 @@
             }
         }));
         $A.enqueueAction(action); 
+    },
+
+    salvardados: function(cmp, event, helper) {
+        
+        var action = cmp.get("c.inserirContato");
+        
+        action.setParams({ 
+            nomeourazaosocial : cmp.get("v.nomeourazaosocial"),
+            telefone : cmp.get("v.telefone"),
+            qtnpacotes : cmp.get("v.qtnpacotes"),
+        });
+
+        action.setCallback(this, function(response) {
+            var state = response.getState();
+            if (state === "SUCCESS") {
+            }
+        });
+        $A.enqueueAction(action);
     }
 })

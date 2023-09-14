@@ -67,6 +67,22 @@ public class GestaoContasController {
         }
     }
 
+    @AuraEnabled
+    public static void inserirDados(String nomeourazaosocial, String telefone, String qtnPacotes) {
+        Account novoDado = new Account();
+        
+        novoDado.nomeourazao = nomeourazaosocial;
+        novoDado.Phone = Phone;
+        novoDado.qtnpacotes = qtnpacotes;
+
+        try {
+            insert novoDado;
+        } catch (Exception e) {
+            // Lide com qualquer erro de inserção aqui
+            System.debug('Erro ao inserir dado: ' + e.getMessage());
+        }
+    }
+
     class CepModel {
     
         @AuraEnabled public String cep;

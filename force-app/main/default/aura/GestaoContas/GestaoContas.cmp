@@ -13,7 +13,11 @@
 
     <aura:attribute name="accountType" type="string" default="CPF" />
 
+    <aura:attribute name="cpfoucnpj" type="string" default="" />
+
     <aura:attribute name="cep" type="string" default="" />
+
+    <aura:attribute name="nomeourazaosocial" type="string" default="" />
 
     <aura:attribute name="rua" type="string" default="" />
 
@@ -22,6 +26,10 @@
     <aura:attribute name="cidade" type="string" default="" />
 
     <aura:attribute name="uf" type="string" default="" />
+
+    <aura:attribute name="telefone" type="string" default="" />
+
+    <aura:attribute name="qtnpacotes" type="string" default="" />
 
     <aura:if isTrue="{! v.pacote}">
         <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
@@ -91,7 +99,7 @@
                                 <lightning:layout multipleRows="true">
                                     <!-- Linha 1 -->
                                     <lightning:layoutItem padding="around-small" size="6">
-                                        <lightning:input name="cpfCnpj" label="CPF OU CNPJ: " />
+                                        <lightning:input name="cpfCnpj" label="CPF OU CNPJ: "/>
                                     </lightning:layoutItem>
                                     <lightning:layoutItem padding="around-small" size="6">
                                         <lightning:input name="cep" label="CEP: " value="{!v.cep}" onchange="{!c.changeCep}" onfocusout="{!c.buscaCep}" />
@@ -99,7 +107,7 @@
 
                                     <!-- Linha 1 -->
                                     <lightning:layoutItem padding="around-small" size="12">
-                                        <lightning:input name="nome" label="Nome ou Razão Social: " />
+                                        <lightning:input name="nome" label="Nome ou Razão Social: " value="{!v.nomeourazaosocial}" />
                                     </lightning:layoutItem>
 
                                     <!-- Linha 2 -->
@@ -117,12 +125,12 @@
                                         <lightning:input name="uf" value="{!v.uf}" label="UF" />
                                     </lightning:layoutItem>
                                     <lightning:layoutItem padding="around-small" size="6">
-                                        <lightning:input name="telefone" label="Telefone: " />
+                                        <lightning:input name="telefone" label="Telefone: " value="{!v.telefone}" />
                                     </lightning:layoutItem>
 
                                     <!-- Linha 1 -->
                                     <lightning:layoutItem padding="around-small" size="6">
-                                        <lightning:input name="qtnPacotes" label="Quantidades de Pacotes: " />
+                                        <lightning:input name="qtnPacotes" label="Quantidades de Pacotes: " value="{!v.qtnpacotes}" />
                                     </lightning:layoutItem>
 
                                 </lightning:layout>
@@ -130,7 +138,7 @@
                             <div class="slds-modal__footer">
                                 <button class="slds-button slds-button_neutral" aria-label="Cancel and close"
                                     onclick="{! c.fecharModal}">Cancelar</button>
-                                <button class="slds-button slds-button_brand">Salvar</button>
+                                <button class="slds-button slds-button_brand" onclick="{!c.salvardados}" onfocusout="{!c.novaConta}">Salvar</button>
                             </div>
                         </div>
                     </section>

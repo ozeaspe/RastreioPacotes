@@ -65,6 +65,10 @@
 
     changeCep: function (component, event, helper) {
         component.set ("v.cep", event.getParam("value"));
-    }
+    },
+
+    novaConta: function (component, event, helper) {
+        helper.salvardados(component, event, helper);
+    },
 
 })
