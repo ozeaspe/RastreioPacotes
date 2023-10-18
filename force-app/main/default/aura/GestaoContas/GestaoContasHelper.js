@@ -63,9 +63,9 @@
         var action = cmp.get("c.inserirContato");
         
         action.setParams({ 
-            nomeourazaosocial : cmp.get("v.nomeourazaosocial"),
-            telefone : cmp.get("v.telefone"),
-            qtnpacotes : cmp.get("v.qtnpacotes"),
+            Name : cmp.get("v.name"),
+            Phone : cmp.get("v.phone"),
+            qtnPacotes__c : cmp.get("v.qtnPacotes"),
         });
 
         action.setCallback(this, function(response) {

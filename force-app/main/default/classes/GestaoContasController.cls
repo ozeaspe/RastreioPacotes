@@ -68,17 +68,20 @@ public class GestaoContasController {
     }
 
     @AuraEnabled
-    public static void inserirDados(String nomeourazaosocial, String telefone, String qtnPacotes) {
+    public static void inserirDados(String nome, String cpf, String cnpj, 
+                                    String telefone, String qtnPacotes) {
         Account novoDado = new Account();
         
-        novoDado.nomeourazao = nomeourazaosocial;
-        novoDado.Phone = Phone;
-        novoDado.qtnpacotes = qtnpacotes;
+        novoDado.Name = nome;
+        novoDado.CPF__c = cpf;
+        novoDado.CNPJ__c = cnpj;
+        novoDado.Phone = telefone;
+        novoDado.qtnPacotes__c = qtnpacotes;
 
         try {
             insert novoDado;
         } catch (Exception e) {
-            // Lide com qualquer erro de inserção aqui
+            
             System.debug('Erro ao inserir dado: ' + e.getMessage());
         }
     }
