@@ -9,13 +9,13 @@
         component.set('v.columns', [
             { label: 'Nome/Razão Social', fieldName: 'nome', type: 'text' },
             { label: 'CPF/CNPJ', fieldName: 'cpfcnpj', type: 'text' },
-            { label: 'CEP', fieldName: 'cep', type: 'integer' },
+            { label: 'CEP', fieldName: 'cep', type: 'text' },
             { label: 'Rua', fieldName: 'rua', type: 'text' },
             { label: 'Bairro', fieldName: 'bairro', type: 'text' },
             { label: 'Cidade', fieldName: 'localidade', type: 'text' },
             { label: 'UF', fieldName: 'uf', type: 'text' },
             { label: 'Telefone', fieldName: 'telefone', type: 'phone' },
-            { label: 'Quantidade de Pacotes', fieldName: 'qtdpacotes', type: 'integer' },
+            { label: 'Quantidade de Pacotes', fieldName: 'qtnPacotes', type: 'text' },
             { type: 'action', typeAttributes: { rowActions: actions } }
         ]);
 

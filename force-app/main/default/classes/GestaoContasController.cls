@@ -37,7 +37,8 @@ public class GestaoContasController {
                                     BillingPostalCode,
                                     localidade__c, 
                                     BillingState, 
-                                    BillingStreet, 
+                                    BillingStreet,
+                                    qtnPacotes__c, 
                                     Name, 
                                     Phone  
                                 FROM Account 
@@ -50,7 +51,8 @@ public class GestaoContasController {
                                     BillingPostalCode,
                                     localidade__c, 
                                     BillingState, 
-                                    BillingStreet, 
+                                    BillingStreet,
+                                    qtnPacotes__c, 
                                     Name, 
                                     Phone  
                                 FROM Account 
