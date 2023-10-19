@@ -22,7 +22,7 @@
                         rua: element.BillingStreet,
                         uf: element.BillingState,
                         telefone:element.Phone,
-                        qntPacotes: element.qtnPacotes__c
+                        qtnPacotes: element.qtnPacotes__c
                     }
                 );
 
