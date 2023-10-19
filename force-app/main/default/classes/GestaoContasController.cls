@@ -68,15 +68,26 @@ public class GestaoContasController {
     }
 
     @AuraEnabled
-    public static void inserirDados(String nome, String cpf, String cnpj, 
-                                    String telefone, String qtnPacotes) {
+    public static void inserirDados(String nome, String cpfoucnpj, String telefone, String qtnPacotes, 
+                                    String cep, String rua, String bairro, String cidade, String uf ) {
         Account novoDado = new Account();
+
+        if(cpfoucnpj.length() > 11 ){
+
+            novoDado.CNPJ__c = cpfoucnpj;
+
+        }else{
+            novoDado.CPF__c = cpfoucnpj;
+        }
         
         novoDado.Name = nome;
-        novoDado.CPF__c = cpf;
-        novoDado.CNPJ__c = cnpj;
         novoDado.Phone = telefone;
-        novoDado.qtnPacotes__c = qtnpacotes;
+        novoDado.qtnPacotes__c = qtnPacotes;
+        novoDado.BillingPostalCode = cep;
+        novoDado.BillingStreet = rua;
+        novoDado.BillingCity = bairro;
+        novoDado.localidade__c = cidade;
+        novoDado.BillingState = uf;
 
         try {
             insert novoDado;

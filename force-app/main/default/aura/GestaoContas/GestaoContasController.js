@@ -68,6 +68,7 @@
     },
 
     novaConta: function (component, event, helper) {
+        
         helper.salvardados(component, event, helper);
     },
 

@@ -60,17 +60,24 @@
 
     salvardados: function(cmp, event, helper) {
         
-        var action = cmp.get("c.inserirContato");
+        var action = cmp.get("c.inserirDados");
         
         action.setParams({ 
-            Name : cmp.get("v.name"),
-            Phone : cmp.get("v.phone"),
-            qtnPacotes__c : cmp.get("v.qtnPacotes"),
+            nome : cmp.get("v.nomeourazaosocial"),
+            cpfoucnpj: cmp.get("v.cpfoucnpj"),
+            cep : cmp.get("v.cep"),
+            rua : cmp.get("v.rua"),
+            bairro : cmp.get("v.bairro"),
+            cidade : cmp.get("v.cidade"),
+            uf : cmp.get("v.uf"),
+            telefone : cmp.get("v.telefone"),
+            qtnPacotes : cmp.get("v.qtnPacotes")
         });
 
         action.setCallback(this, function(response) {
             var state = response.getState();
             if (state === "SUCCESS") {
+                alert("Dados Inserido com sucesso!")
             }
         });
         $A.enqueueAction(action);
