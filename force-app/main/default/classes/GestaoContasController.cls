@@ -74,29 +74,39 @@ public class GestaoContasController {
                                     String cep, String rua, String bairro, String cidade, String uf ) {
         Account novoDado = new Account();
 
-        if(cpfoucnpj.length() > 11 ){
-
+         if(cpfoucnpj.length() > 11 && cpfoucnpj != ''){
             novoDado.CNPJ__c = cpfoucnpj;
-
         }else{
             novoDado.CPF__c = cpfoucnpj;
         }
-        
-        novoDado.Name = nome;
-        novoDado.Phone = telefone;
-        novoDado.qtnPacotes__c = qtnPacotes;
-        novoDado.BillingPostalCode = cep;
-        novoDado.BillingStreet = rua;
-        novoDado.BillingCity = bairro;
-        novoDado.localidade__c = cidade;
-        novoDado.BillingState = uf;
 
+        if(nome != ''){
+            novoDado.Name = nome;
+        }else if(telefone != ''){
+            novoDado.Phone = telefone;
+        }else if(qtnPacotes != ''){
+            novoDado.qtnPacotes__c = qtnPacotes;
+        }else if(cep != ''){
+            novoDado.BillingPostalCode = cep;
+        }else if(rua != ''){
+            novoDado.BillingStreet = rua;
+        }else if(bairro != ''){
+            novoDado.BillingStreet = bairro;
+        }else if(cidade != ''){
+            novoDado.localidade__c = cidade;
+        }else if(uf != ''){
+            novoDado.BillingState = uf;
+        }else {
+            
+        
         try {
             insert novoDado;
+            
         } catch (Exception e) {
             
             System.debug('Erro ao inserir dado: ' + e.getMessage());
         }
+    }
     }
 
     class CepModel {

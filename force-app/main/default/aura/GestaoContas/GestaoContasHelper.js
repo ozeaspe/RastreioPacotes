@@ -74,12 +74,33 @@
             qtnPacotes : cmp.get("v.qtnPacotes")
         });
 
-        action.setCallback(this, function(response) {
+        action.setCallback(this, (function(response) {
             var state = response.getState();
-            if (state === "SUCCESS") {
-                alert("Dados Inserido com sucesso!")
+            if (state === "SUCCESS"){
+                var toastEvent = $A.get("e.force:showToast");
+                toastEvent.setParams({
+                    "type": "success",
+                    "message": "Dados inseridos com sucesso!"
+                });
+                toastEvent.fire();
+                cmp.set("v.nomeourazaosocial");
+                cmp.set("v.cpfoucnpj");
+                cmp.set("v.cep");
+                cmp.set("v.rua");
+                cmp.set("v.bairro");
+                cmp.set("v.cidade");
+                cmp.set("v.uf");
+                cmp.set("v.telefone");
+                cmp.set("v.qtnPacotes");
+            }else{
+                var toastEvent = $A.get("e.force:showToast");
+                toastEvent.setParams({
+                    "type": "error",
+                    "message": "Ops algo deu errado!"
+                });
+                toastEvent.fire();
             }
-        });
+        }));
         $A.enqueueAction(action);
     }
 })
