@@ -138,7 +138,7 @@
                             <div class="slds-modal__footer">
                                 <button class="slds-button slds-button_neutral" aria-label="Cancel and close"
                                     onclick="{! c.fecharModal}">Cancelar</button>
-                                <button class="slds-button slds-button_brand" onclick="{!c.novaConta}" onfocusout="{!c.fecharModal}">Salvar</button>
+                                <button class="slds-button slds-button_brand" onclick="{!c.novaConta}">Salvar</button>
                             </div>
                         </div>
                     </section>

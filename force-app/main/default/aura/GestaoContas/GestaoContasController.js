@@ -68,7 +68,17 @@
     },
 
     novaConta: function (component, event, helper) {
-        
+
+       /* if(component.get("v.cpfoucnpj").length()<11 ){
+            helper.showToast("warning", "Quantidade de números invalida");
+            return;
+        }*/
+
+        if(component.get("v.cpfoucnpj").trim() == ""){
+            helper.showToast("warning", "Por favor preencha corretamente o cpf ou cnpj");
+            return;
+        }
+
         helper.salvardados(component, event, helper);
     },
 

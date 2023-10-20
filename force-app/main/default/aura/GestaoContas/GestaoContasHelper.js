@@ -77,13 +77,10 @@
         action.setCallback(this, (function(response) {
             var state = response.getState();
             if (state === "SUCCESS"){
-                var toastEvent = $A.get("e.force:showToast");
-                toastEvent.setParams({
-                    "type": "success",
-                    "message": "Dados inseridos com sucesso!",
-                });
-                toastEvent.fire();
-                cmp.set("v.nomeourazaosocial");
+
+                helper.showToast("success", "Dados inseridos com sucesso!");
+
+                cmp.set("v.nomeourazaosocial", "");
                 cmp.set("v.cpfoucnpj");
                 cmp.set("v.cep");
                 cmp.set("v.rua");
@@ -92,15 +89,23 @@
                 cmp.set("v.uf");
                 cmp.set("v.telefone");
                 cmp.set("v.qtnPacotes");
+
+                cmp.set("v.exibirModal", false);
+
             }else{
-                var toastEvent = $A.get("e.force:showToast");
-                toastEvent.setParams({
-                    "type": "error",
-                    "message": "Ops algo deu errado!"
-                });
-                toastEvent.fire();
+               helper.showToast("error", "Ops algo deu errado!");
             }
         }));
         $A.enqueueAction(action);
+    },
+
+    showToast: function(type, message) {
+        var toastEvent = $A.get("e.force:showToast");
+        toastEvent.setParams({
+            "type": type,
+            "message": message
+        });
+        toastEvent.fire();
     }
+    
 })
