@@ -80,7 +80,7 @@
                 var toastEvent = $A.get("e.force:showToast");
                 toastEvent.setParams({
                     "type": "success",
-                    "message": "Dados inseridos com sucesso!"
+                    "message": "Dados inseridos com sucesso!",
                 });
                 toastEvent.fire();
                 cmp.set("v.nomeourazaosocial");
