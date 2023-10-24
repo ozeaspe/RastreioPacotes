@@ -81,14 +81,14 @@
                 helper.showToast("success", "Dados inseridos com sucesso!");
 
                 cmp.set("v.nomeourazaosocial", "");
-                cmp.set("v.cpfoucnpj");
-                cmp.set("v.cep");
-                cmp.set("v.rua");
-                cmp.set("v.bairro");
-                cmp.set("v.cidade");
-                cmp.set("v.uf");
-                cmp.set("v.telefone");
-                cmp.set("v.qtnPacotes");
+                cmp.set("v.cpfoucnpj", "");
+                cmp.set("v.cep", "");
+                cmp.set("v.rua", "");
+                cmp.set("v.bairro", "");
+                cmp.set("v.cidade", "");
+                cmp.set("v.uf", "");
+                cmp.set("v.telefone", "");
+                cmp.set("v.qtnPacotes","");
 
                 cmp.set("v.exibirModal", false);
 
@@ -106,6 +106,32 @@
             "message": message
         });
         toastEvent.fire();
+    },
+
+    apagarDados: function(cmp, event, helper) {
+        alert("funcionou");
+        var action = cmp.get("c.deletarRegistro");
+        
+        action.setParams({ 
+            delete : cmp.get(row)
+    
+        });
+
+        action.setCallback(this, (function(response) {
+            var state = response.getState();
+            if (state === "SUCCESS"){
+
+                helper.showToast("success", "Dados inseridos com sucesso!");
+
+    
+
+                cmp.set("v.exibirModal", false);
+
+            }else{
+               helper.showToast("error", "Ops algo deu errado!");
+            }
+        }));
+        $A.enqueueAction(action);
     }
     
 })

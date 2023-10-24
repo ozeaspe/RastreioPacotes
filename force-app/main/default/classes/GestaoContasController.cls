@@ -98,6 +98,20 @@ public class GestaoContasController {
     }
     }
 
+    public static void deletarRegistro(Id numeroId){
+
+        Account excluirDado = [SELECT Id FROM Account WHERE Id = :numeroId LIMIT 1];
+
+        try {
+
+            delete excluirDado;
+
+        }catch (Exception e) {
+
+            System.debug('Erro ao deletar dado: ' + e.getMessage());
+        }
+    }
+
     class CepModel {
     
         @AuraEnabled public String cep;

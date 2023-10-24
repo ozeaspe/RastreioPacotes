@@ -38,7 +38,7 @@
                 component.set("v.pacote", true);
                 break;
             case 'deletar':
-                helper.removeBook(component, row);
+                helper.apagarDados(component, row);
                 break;
         }
     },
@@ -77,9 +77,34 @@
         if(component.get("v.cpfoucnpj").trim() == ""){
             helper.showToast("warning", "Por favor preencha corretamente o cpf ou cnpj");
             return;
-        }
+        }else if(component.get("v.nomeourazaosocial") == ""){
+            helper.showToast("warning", "Por favor preencha corretamente o nome ou a razão social");
+            return;
+        }else if(component.get("v.cep") == ""){
+            helper.showToast("warning", "Por favor preencha corretamente o nome ou a razão social");
+            return;
+        }else if(component.get("v.rua") == ""){
+            helper.showToast("warning", "Por favor preencha corretamente a rua");
+            return;
+        }else if(component.get("v.bairro") == ""){
+            helper.showToast("warning", "Por favor preencha corretamente o bairro");
+            return;
+        }else if(component.get("v.cidade") == ""){
+            helper.showToast("warning", "Por favor preencha corretamente a cidade");
+            return;
+        }else if(component.get("v.uf") == ""){
+            helper.showToast("warning", "Por favor preencha corretamente o estado");
+            return;
+        }else if(component.get("v.telefone") == ""){
+            helper.showToast("warning", "Por favor preencha corretamente o telefone");
+            return;
+        }else if(component.get("v.qtnPacotes") == ""){
+            helper.showToast("warning", "Por favor preencha corretamente a quantidade de pacotes");
+            return;
+        }else{
 
-        helper.salvardados(component, event, helper);
-    },
+            helper.salvardados(component, event, helper);
+        }
+    }
 
 })
