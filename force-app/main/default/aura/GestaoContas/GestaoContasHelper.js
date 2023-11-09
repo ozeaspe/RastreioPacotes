@@ -109,25 +109,26 @@
     },
 
     apagarDados: function(cmp, event, helper) {
-        alert("funcionou");
+        cmp.set("v.pacote", true);
+        var registro = event.getParam('row');
         var action = cmp.get("c.deletarRegistro");
         
         action.setParams({ 
-            delete : cmp.get(row)
+            deletarRegistro : registro
     
         });
 
         action.setCallback(this, (function(response) {
-            var state = response.getState();
-            if (state === "SUCCESS"){
-
+            cmp.set("v.pacote", false);
+            if (response.getState() === "SUCCESS"){
+                var rows = cmp.get('v.data ');
+                var rowIndex = rows.indexOf(registro);
+                rows.splice(rowIndex, 1);
+                cmp.set('v.data', rows);
                 helper.showToast("success", "Dados inseridos com sucesso!");
 
-    
-
-                cmp.set("v.exibirModal", false);
-
-            }else{
+            }
+            else{
                helper.showToast("error", "Ops algo deu errado!");
             }
         }));

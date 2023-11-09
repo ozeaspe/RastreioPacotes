@@ -70,8 +70,7 @@ public class GestaoContasController {
     }
 
     @AuraEnabled
-    public static void inserirDados(String nome, String cpfoucnpj, String telefone, String qtnPacotes, 
-                                    String cep, String rua, String bairro, String cidade, String uf ) {
+    public static void inserirDados(String nome, String cpfoucnpj, String telefone, String qtnPacotes, String cep, String rua, String bairro, String cidade, String uf ) {
         Account novoDado = new Account();
 
          if(cpfoucnpj.length() > 11){
@@ -98,19 +97,13 @@ public class GestaoContasController {
     }
     }
 
-    public static void deletarRegistro(Id numeroId){
-
-        Account excluirDado = [SELECT Id FROM Account WHERE Id = :numeroId LIMIT 1];
-
-        try {
-
-            delete excluirDado;
-
-        }catch (Exception e) {
-
-            System.debug('Erro ao deletar dado: ' + e.getMessage());
-        }
-    }
+   @AuraEnabled
+   public static void deletarRegistro(Account registro){
+    
+    delete registro;
+   
+   }
+    
     class CepModel {
     
         @AuraEnabled public String cep;
