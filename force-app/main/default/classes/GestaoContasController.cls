@@ -111,7 +111,6 @@ public class GestaoContasController {
             System.debug('Erro ao deletar dado: ' + e.getMessage());
         }
     }
-
     class CepModel {
     
         @AuraEnabled public String cep;
