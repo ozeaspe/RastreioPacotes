@@ -14,6 +14,7 @@
                 
                 data.push(
                     {
+                        id:element.Id,
                         nome: element.Name,
                         cpfcnpj: accType == 'CPF' ? element.CPF__c : element.CNPJ__c,
                         cep: element.BillingPostalCode,
@@ -108,25 +109,25 @@
         toastEvent.fire();
     },
 
-    apagarDados: function(cmp, event, helper) {
-        cmp.set("v.pacote", true);
-        var registro = event.getParam('row');
+    apagarDados: function(cmp, event, helper, accountId) {
+
         var action = cmp.get("c.deletarRegistro");
-        
         action.setParams({ 
-            deletarRegistro : registro
+            idConta : accountId
     
         });
-
         action.setCallback(this, (function(response) {
-            cmp.set("v.pacote", false);
             if (response.getState() === "SUCCESS"){
-                var rows = cmp.get('v.data ');
-                var rowIndex = rows.indexOf(registro);
-                rows.splice(rowIndex, 1);
-                cmp.set('v.data', rows);
-                helper.showToast("success", "Dados inseridos com sucesso!");
-
+                var response = response.getReturnValue();
+                if(response.success){
+                    var rows = cmp.get('v.data ');
+                    var rowIndex = rows.indexOf(row);
+                    rows.splice(rowIndex, 1);
+                    cmp.set('v.data', rows);
+                    helper.showToast("success", response.msg);
+                }else{
+                    helper.showToast("error", response.msg); 
+                }
             }
             else{
                helper.showToast("error", "Ops algo deu errado!");

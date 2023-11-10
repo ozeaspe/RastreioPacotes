@@ -30,14 +30,15 @@
     },
 
     handleRowAction: function (component, event, helper) {
+        
         var action = event.getParam('action');
-
+        var row = event.getParam('row');
         switch (action.name) {
             case 'adicionar':
                 component.set("v.pacote", true);
                 break;
             case 'deletar':
-                helper.apagarDados(component, event);
+                helper.apagarDados(component, event, helper, JSON.stringify(row.id));
                 break;
         }
     },

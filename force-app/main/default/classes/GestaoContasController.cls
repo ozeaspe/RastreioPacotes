@@ -98,10 +98,22 @@ public class GestaoContasController {
     }
 
    @AuraEnabled
-   public static void deletarRegistro(Account registro){
-    
-    delete registro;
-   
+   public static Map<String, Object> deletarRegistro(String idConta){
+
+    Account conta = [SELECT Id FROM Account WHERE Id =: idConta];
+
+    Map<String, Object> retorno = New Map<String, Object>();
+    Database.DeleteResult result = Database.Delete(conta, false);
+    if (result.isSuccess()) {
+        retorno.put('success', true);
+        retorno.put('msg', 'conta deletada com sucesso!');
+    } else {
+        retorno.put('success', false);
+        for (Database.Error err : result.getErrors()) {
+            retorno.put('msg', 'Error ao deletar conta: ' + err.getMessage());
+        }
+    }
+   return retorno;
    }
     
     class CepModel {
