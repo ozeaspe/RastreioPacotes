@@ -38,7 +38,8 @@
                 component.set("v.pacote", true);
                 break;
             case 'deletar':
-                helper.apagarDados(component, event, helper, JSON.stringify(row.id));
+                //aqui vamos enviar a row mesmo, ao invez de enviar a row.id
+                helper.apagarDados(component, event, helper, row);
                 break;
         }
     },

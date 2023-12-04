@@ -99,21 +99,29 @@ public class GestaoContasController {
 
    @AuraEnabled
    public static Map<String, Object> deletarRegistro(String idConta){
+       System.debug('### APEX > deletarRegistro');
+       Map<String, Object> retorno = New Map<String, Object>();
+       try{
+           //Por algum motivo o Id da conta está vindo com asplas duplas, entao utilizei o metodo replace para remover
+           //Seria uma boa investigar por qual motivo esse id da conta está chegando aqui com aspas duplas
+           Account conta = [SELECT Id FROM Account WHERE Id =: idConta.replace('"', '') LIMIT 1];
 
-    Account conta = [SELECT Id FROM Account WHERE Id =: idConta];
-
-    Map<String, Object> retorno = New Map<String, Object>();
-    Database.DeleteResult result = Database.Delete(conta, false);
-    if (result.isSuccess()) {
-        retorno.put('success', true);
-        retorno.put('msg', 'conta deletada com sucesso!');
-    } else {
-        retorno.put('success', false);
-        for (Database.Error err : result.getErrors()) {
-            retorno.put('msg', 'Error ao deletar conta: ' + err.getMessage());
-        }
-    }
-   return retorno;
+           Database.DeleteResult result = Database.Delete(conta, false);
+           if (result.isSuccess()) {
+               retorno.put('success', true);
+               retorno.put('msg', 'Conta deletada com sucesso!');
+           } else {
+               retorno.put('success', false);
+               for (Database.Error err : result.getErrors()) {
+                   retorno.put('msg', 'Error ao deletar conta: ' + err.getMessage());
+               }
+           }
+       } catch(Exception e){
+           retorno.put('success', false);
+           retorno.put('msg', 'Back-End Error: ' + e.getMessage() + ' Line: '+ e.getLineNumber());  
+       }
+        
+   	return retorno;
    }
     
     class CepModel {

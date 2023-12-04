@@ -109,13 +109,14 @@
         toastEvent.fire();
     },
 
-    apagarDados: function(cmp, event, helper, accountId) {
+    apagarDados: function(cmp, event, helper, row) {
 
         var action = cmp.get("c.deletarRegistro");
+        
         action.setParams({ 
-            idConta : accountId
-    
+            idConta :  JSON.stringify(row.id) //aqui enviamos pro Apex o id da conta como string
         });
+         
         action.setCallback(this, (function(response) {
             if (response.getState() === "SUCCESS"){
                 var response = response.getReturnValue();
@@ -125,11 +126,11 @@
                     rows.splice(rowIndex, 1);
                     cmp.set('v.data', rows);
                     helper.showToast("success", response.msg);
-                }else{
+                } else{
                     helper.showToast("error", response.msg); 
                 }
             }
-            else{
+            else {
                helper.showToast("error", "Ops algo deu errado!");
             }
         }));
